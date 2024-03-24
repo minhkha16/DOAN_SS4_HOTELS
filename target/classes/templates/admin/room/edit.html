@@ -1,0 +1,105 @@
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{layout/admin :: content('Room List', ~{this :: .content-wrapper})}">
+
+<head>
+	<title></title>
+</head>
+
+<body>
+
+	<div class="content-wrapper">
+		<section class="content-header">
+			<div class="container-fluid">
+				<div class="row mb-2">
+					<div style="text-align: right;position:relative; 
+							font-size:30px; 
+							color: white;
+							letter-spacing:0px; 
+							width:400px; text-align:center; 
+							margin:auto; white-space:nowrap; 
+							border:1px solid white;
+							border-radius: 50%;
+							padding:5px 11px 3px 11px;
+							background-color: darkblue;
+							font-family: Arial, Helvetica, sans-serif; ">
+						<h1>Edit Room</h1>
+					</div>
+				</div>
+			</div>
+			<!-- /.container-fluid -->
+		</section>
+
+
+		<!-- Main content -->
+		<section class="content">
+			<form method="POST" th:action="@{/admin/room/edit}" enctype="multipart/form-data">
+				<div class="form-group">
+					<label>Content</label>
+					<textarea  th:field="${room.content}" id="editor"></textarea>
+				</div>
+				<div class="form-group">
+					<label>Number of room</label>
+					<input type="text" class="form-control" placeholder="Enter the Number of room"
+						th:field="${room.fixedQuantity}">
+				</div>
+				<div class="form-group">
+					<label>Hotel</label>
+					<select class="form-control" th:field="${room.hotel}">
+						<th:block th:each="ht : ${hotels}">
+							<option th:value="${ht.id}" th:text="${ht.name}"></option>
+						</th:block>
+					</select>
+				</div>
+				<div class="form-group">
+					<label>Quantity date</label>
+					<input type="text" class="form-control" placeholder="Enter the Quantity date"
+						th:field="${dateprice.quantityDate}">
+				</div>
+				<div class="form-group">
+					<label>Price</label>
+					<input type="text" class="form-control" placeholder="Enter the Price" th:field="${dateprice.price}">
+				</div>
+				<div class="form-group">
+					<label>Bed</label>
+					<input type="text" class="form-control" placeholder="Enter the Bed" th:field="${kindofroom.bed}">
+				</div>
+				<div class="form-group">
+					<label>Balcony</label>
+					<input type="text" class="form-control" placeholder="Enter the Balcony"
+						th:field="${kindofroom.balcony}">
+				</div>
+				<div class="form-group">
+					<label>Quality</label>
+					<input type="text" class="form-control" placeholder="Enter the Quality"
+						th:field="${kindofroom.quality}">
+				</div>
+				<div class="form-group">
+					<label>Other</label>
+					<input type="text" class="form-control" placeholder="Enter the Other" th:field="${kindofroom.orther}">
+				</div>
+				<div class="form-group" style="margin: 5px;">
+					<label>Upload File</label>
+					<input type="file" name="files" multiple>
+				</div>
+				<div class="form-group" style="margin: 5px;" th:each="img : ${imgs}">
+					<img th:src="@{'/images/' + ${img.name}}" width="120px" height="100px">
+					<input type="hidden" name="id_image" th:value="${img.id}"/>
+				</div>
+				<div class="form-group">
+					<input type="hidden" th:field="${room.id}" />
+					<input type="hidden" name="id_kindofroom" th:value="${kindofroom.id}" />
+					<input type="hidden" name="id_dateprice" th:value="${dateprice.id}" />
+					<button type="submit" class="btn bg-gray color-palette"
+						style="width: 100%; padding: 20px; color: white; font-weight: 600;">
+						<i class="fas fa-plus" style="width: 200px;"></i>
+					</button>
+				</div>
+			</form>
+		</section>
+		<!-- /.content -->
+	</div>
+
+
+</body>
+
+</html>

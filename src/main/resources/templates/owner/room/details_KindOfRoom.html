@@ -1,0 +1,103 @@
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{layout/owner :: content('Details Book', ~{this :: .content-wrapper})}">
+<head>
+<title></title>
+</head>
+<body>
+
+	<div class="content-wrapper">
+		<!-- Content Header (Page header) -->
+		<section class="content-header">
+			<div class="container-fluid">
+				<div class="row mb-2">
+					<div 
+					style="text-align: right;position:relative; 
+							font-size:30px; 
+							color: white;
+							letter-spacing:0px; 
+							width:400px; text-align:center; 
+							margin:auto; white-space:nowrap; 
+							border:1px solid white;
+							border-radius: 50%;
+							padding:5px 11px 3px 11px;
+							background-color: 343a40;
+							font-family: Arial, Helvetica, sans-serif;
+							text-align:center;
+							text-transform:uppercase; ">
+						<h1>Details</h1>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Main content -->
+		<section class="content">
+			<table id="example2" class="table table-bordered table-striped">
+						<thead>
+							<tr align="center">
+								<th>Image</th>
+								<th>Quanlity</th>
+								<th>Bed</th>
+								<th>Balcony</th>
+								<th>Order</th>
+								<th>Created</th>
+								<th>Updated</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr align="center" th:each="room : ${rooms}">
+								<td>
+									<img th:each="img : ${room.images}" th:src="@{'/images/' + ${img.name}}" width="90" height="75" alt="Image" usemap="#planetmap">
+									 
+									<map name="planetmap">
+									    <area shape="rect" coords="0,0,82,126" alt="Sun" th:each="img : ${room.images}" th:href="@{'/images/' + ${img.name}}">
+									</map>
+								</td>
+								<td th:each="qty : ${room.kindofrooms}" th:text="${qty.quality}">
+								<td th:each="qty : ${room.kindofrooms}" th:text="${qty.bed}">
+								<td>
+									<th:block th:each="qty : ${room.kindofrooms}" th:if="${qty.balcony == true}">
+										<div>
+											<span style="background-color: #65B741;
+									  border: none;
+									  color: white;
+									   border-radius: 5%;
+									  padding: 9px 25px;
+									  font-size: 10px;
+									  text-align: center;
+									  text-decoration: none;
+									  display: inline-block;
+									  font-size: 16px;">Agress</span>
+													  
+										</div>
+									</th:block>
+									<th:block th:each="qty : ${room.kindofrooms}" th:if="${qty.balcony == false}">
+										<div>
+											<span style="background-color: #BF3131;
+									  border: none;
+									  color: white;
+									   border-radius: 5%;
+									  padding: 9px 25px;
+									  font-size: 10px;
+									  text-align: center;
+									  text-decoration: none;
+									  display: inline-block;
+									  font-size: 16px;">Disagress</span>
+										</div>
+									</th:block>
+								 </td>
+								<td th:each="qty : ${room.kindofrooms}" th:text="${qty.orther}">
+								<td th:each="qty : ${room.kindofrooms}" th:text="${qty.created}">
+								<td th:each="qty : ${room.kindofrooms}" th:text="${qty.updated}">
+								
+							</tr>
+						</tbody>
+					</table>
+					
+		</section>
+		<!-- /.content -->
+	</div>
+
+
+</body>
+</html>

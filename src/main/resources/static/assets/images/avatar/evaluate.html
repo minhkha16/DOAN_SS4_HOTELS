@@ -1,0 +1,136 @@
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{layout/owner :: content('Evaluate', ~{this :: .content-wrapper})}">
+<head>
+<title></title>
+</head>
+<body>
+
+	<div class="content-wrapper">
+		<section class="content-header">
+			<div class="container-fluid">
+				<div class="row mb-2">
+					<div 
+					style="text-align: right;position:relative; 
+							font-size:30px; 
+							color: white;
+							letter-spacing:0px; 
+							width:400px; text-align:center; 
+							margin:auto; white-space:nowrap; 
+							border:1px solid white;
+							border-radius: 50%;
+							padding:5px 11px 3px 11px;
+							background-color: darkblue;
+							font-family: Arial, Helvetica, sans-serif; ">
+						<h1>Evaluete</h1>
+					</div>
+				</div>
+			</div>
+			<!-- /.container-fluid -->
+		</section>
+
+
+		<!-- Main content -->
+		<section class="content">
+			 <div class="card-body">
+	            <table id="example2" class="table table-bordered table-striped">
+					
+						<thead>
+							<tr align="center">
+								<th>STT</th>
+								<th>Username</th>
+								<th>Content</th>
+								<th>Star</th>
+								<th>Status</th>
+								<th>Hotel</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr align="center" th:each="eva : ${evaluates}">
+								<td th:text="${eva.id}"></td>
+								<td th:text="${eva.hotel.account.username}"></td>
+								<td th:text="${eva.content}"></td>
+								<td>
+								<th:block th:if="${eva.star == 1}">
+									<div>
+										<span><i class='fa fa-star'></i></span>
+									</div>
+								</th:block>
+								<th:block th:if="${eva.star == 2}">
+									<div>
+										<span>
+											<i class='fa fa-star'></i>
+											<i class='fa fa-star'></i>
+										</span>
+									</div>
+								</th:block>
+								<th:block th:if="${eva.star == 3}">
+									<div>
+										<span>
+											<i class='fa fa-star'></i>
+											<i class='fa fa-star'></i>
+											<i class='fa fa-star'></i>
+										</span>
+									</div>
+								</th:block>
+								<th:block th:if="${eva.star == 4}">
+									<div>
+										<span>
+											<i class='fa fa-star'></i>
+											<i class='fa fa-star'></i>
+											<i class='fa fa-star'></i>
+											<i class='fa fa-star'></i>
+										</span>
+									</div>
+								</th:block>
+								<th:block th:if="${eva.star == 5}">
+									<div>
+										<span>
+											<i class='fa fa-star'></i>
+											<i class='fa fa-star'></i>
+											<i class='fa fa-star'></i>
+											<i class='fa fa-star'></i>
+											<i class='fa fa-star'></i>
+										</span>
+									</div>
+								</th:block>
+								</td>
+								<td>
+									<th:block th:if="${eva.status == true}">
+										<div>
+											<span style="background-color: #04AA6D;
+											  border: none;
+											  color: white;
+											  padding: 9px 25px;
+											  font-size: 10px;
+											  text-align: center;
+											  text-decoration: none;
+											  display: inline-block;
+											  font-size: 16px;">Actived</span>
+										</div>
+									</th:block>
+									<th:block th:if="${eva.status == false}">
+										<div>
+											<span style="background-color: #f44336;
+											  border: none;
+											  color: white;
+											  font-size: 10px;
+											  padding: 9px 25px;
+											  text-align: center;
+											  text-decoration: none;
+											  display: inline-block;
+											  font-size: 16px;">Passive</span>
+										</div>
+									</th:block>
+								</td>
+								<td th:text="${eva.hotel.name}">
+							</tr>
+						</tbody>
+					</table>
+					</div>
+		</section>
+		<!-- /.content -->
+	</div>
+
+
+</body>
+</html>

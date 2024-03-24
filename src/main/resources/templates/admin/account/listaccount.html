@@ -1,0 +1,133 @@
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{layout/admin :: content('Area List', ~{this :: .content-wrapper})}">
+
+<head>
+	<title></title>
+</head>
+
+<body>
+
+	<div class="content-wrapper">
+		
+		<!-- Content Header (Page header) -->
+		<section class="content-header">
+			<div class="container-fluid">
+				<div class="row mb-2">
+					<div class="col-sm-6">
+						<h1>List Account Hotel</h1>
+					</div>
+				</div>
+			</div>
+			<!-- /.container-fluid -->
+		</section>
+		
+		<th:block th:if="${check} == 1">
+			<div class="col-sm-12 col-md-6">
+			<div id="example1_filter">
+				<form method="post" th:action="@{/admin/account/listhotel}" enctype="multipart/form-data">
+					<label>Email:<input type="text" class="form-control" placeholder="Search Email"
+							aria-controls="example1" name="email"></label>
+					<button type="submit" class="btn btn-lg btn-default">
+						<i class="fa fa-search"></i>
+					</button>
+				</form>
+			</div>
+		</div>
+		</th:block>
+		
+		<th:block th:if="${check} == 2">
+			<div class="col-sm-12 col-md-6">
+			<div id="example1_filter">
+				<form method="post" th:action="@{/admin/account/listuser}" enctype="multipart/form-data">
+					<label>Email:<input type="text" class="form-control" placeholder="Search Email"
+							aria-controls="example1" name="email"></label>
+					<button type="submit" class="btn btn-lg btn-default">
+						<i class="fa fa-search"></i>
+					</button>
+				</form>
+			</div>
+		</div>
+		</th:block>
+		
+		<!-- Main content -->
+		<div class="card">
+
+
+			<div class="card-body">
+				<div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
+
+					<div class="row">
+						<div class="col-sm-12">
+							<table id="example2" class="table table-bordered table-striped dataTable dtr-inline"
+								aria-describedby="example1_info">
+								<thead>
+									<tr>
+										<th class="sorting sorting_asc" tabindex="0" aria-controls="example1"
+											rowspan="1" colspan="1" aria-sort="ascending"
+											aria-label="Rendering engine: activate to sort column descending">FullName
+										</th>
+										<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
+											colspan="1" aria-label="Browser: activate to sort column ascending">BirthDay
+										</th>
+										<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
+											colspan="1" aria-label="Platform(s): activate to sort column ascending">
+											Address</th>
+										<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
+											colspan="1" aria-label="Platform(s): activate to sort column ascending">
+											Email
+										</th>
+										<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
+											colspan="1" aria-label="Platform(s): activate to sort column ascending">
+											Username
+										</th>
+										<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
+											colspan="1" aria-label="Platform(s): activate to sort column ascending">
+											Created
+										</th>
+										<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
+											colspan="1" aria-label="Platform(s): activate to sort column ascending">
+											Updated
+										</th>
+										<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
+											colspan="1" aria-label="Platform(s): activate to sort column ascending">
+
+										</th>
+
+									</tr>
+								</thead>
+								<tbody th:if="${accounts != null}">
+									<tr class="odd" th:each="account :${accounts}">
+										<td class="dtr-control sorting_1" tabindex="0" th:text="${account.fullname}">
+										</td>
+										<td th:text="${account.birthday}"></td>
+										<td th:text="${account.address}"></td>
+										<td th:text="${account.email}"></td>
+										<td th:text="${account.username}"></td>
+										<td th:text="${account.created}"></td>
+										<td th:text="${account.updateted}"></td>
+										<td class="project-actions text-center">
+											<a class="btn btn-info btn-sm"
+												th:href="@{/admin/account/edit/}+${account.id}">
+												<i class="fas fa-pencil-alt">
+												</i>
+												Edit
+											</a>
+										</td>
+									</tr>
+								</tbody>
+
+							</table>
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+		</div>
+		<!-- /.content -->
+	</div>
+
+
+</body>
+
+</html>

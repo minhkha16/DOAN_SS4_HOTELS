@@ -1,0 +1,66 @@
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{layout/owner :: content('Details Room', ~{this :: .content-wrapper})}">
+<head>
+<title></title>
+</head>
+<body>
+
+	<div class="content-wrapper">
+		<section class="content-header">
+			<div class="container-fluid">
+				<div class="row mb-2">
+					<div 
+					style="text-align: right;position:relative; 
+							font-size:30px; 
+							color: white;
+							letter-spacing:0px; 
+							width:400px; text-align:center; 
+							margin:auto; white-space:nowrap; 
+							border:1px solid white;
+							border-radius: 50%;
+							padding:5px 11px 3px 11px;
+							background-color: 343a40;
+							font-family: Arial, Helvetica, sans-serif;
+							text-align:center;
+							text-transform:uppercase; ">
+						<h1>List Room</h1>
+					</div>
+				</div>
+			</div>
+			<!-- /.container-fluid -->
+		</section>
+
+
+		<!-- Main content -->
+		<section class="content">
+			<table id="example2" class="table table-bordered table-striped">
+						<thead>
+							<tr align="center">
+								<th>STT</th>
+								<th>Name</th>
+								<th>Numeber of room</th>
+								<th>Hotel</th>
+								<th>Created</th>
+								<th>Order</th>
+								<th>Edit</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr align="center" th:each="room : ${rooms}">
+								<td th:text="${room.id}"></td>
+								<td th:utext="${room.content}"></td>
+								<td th:text="${room.fixedQuantity}"></td>
+								<td th:text="${room.hotel.name}"></td>
+								<td th:text="${room.created}"></td>
+								<td><a th:href="@{'/owner/book_room/detailsBookByRoom/' + ${room.id}}"><i class='fa fa-eye'></i></a></td>
+								<td><a th:href="@{'/owner/room/edit/' + ${room.id}}"><i class='fa fa-edit'></i></a></td>
+							</tr>
+						</tbody>
+					</table>
+		</section>
+		<!-- /.content -->
+	</div>
+
+
+</body>
+</html>

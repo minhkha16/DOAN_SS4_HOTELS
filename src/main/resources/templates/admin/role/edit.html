@@ -1,0 +1,31 @@
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{layout/admin :: content('Role Edit', ~{this :: .content-wrapper})}">
+
+<head>
+	<title></title>
+</head>
+
+<body>
+
+	<div class="content-wrapper">
+		<form method="post" th:action="@{/admin/role/edit}" 
+		enctype="multipart/form-data">
+			<div class="card-body">
+				<div class="form-group">
+					<label for="exampleInputEmail1" >Name</label>
+					<input type="text" class="form-control" th:field="${role.name}">
+				</div>
+			</div>
+
+			<div class="card-footer">
+				<button type="submit" class="form-control btn btn-primary">Submit</button>
+			</div>
+			<input type="hidden"  th:field="${role.id}">
+			<input type="hidden"  th:field="${role.created}">
+		</form>
+	</div>
+
+
+</body>
+
+</html>

@@ -1,0 +1,161 @@
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{layout/admin :: content('Room List', ~{this :: .content-wrapper})}">
+
+<head>
+	<title></title>
+</head>
+
+<body>
+
+	<div class="content-wrapper">
+		<th:block th:if="${msg == 1}">
+			<div class="alert alert-success alert-dismissible">
+				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+				<h5><i class="icon fas fa-check"></i> Add Success!</h5>
+
+			</div>
+		</th:block>
+		<th:block th:if="${msg == 2}">
+			<div class="alert alert-success alert-dismissible">
+				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+				<h5><i class="icon fas fa-check"></i> Edit Success!</h5>
+			</div>
+		</th:block>
+		<th:block th:if="${msg == 3}">
+			<div class="alert alert-success alert-dismissible">
+				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+				<h5><i class="icon fas fa-check"></i> Delete Success!</h5>
+			</div>
+		</th:block>
+		<!-- Content Header (Page header) -->
+		<section class="content-header">
+			<div class="container-fluid">
+				<div class="row mb-2">
+					<div class="col-sm-6">
+						<h1>List Room</h1>
+					</div>
+				</div>
+			</div>
+			<!-- /.container-fluid -->
+		</section>
+
+		<div class="col-sm-12 col-md-6">
+			<div id="example1_filter" class="dataTables_filter">
+				<form method="post" th:action="@{/admin/room/index}" enctype="multipart/form-data">
+					<input type="hidden" name="search" value="1">
+					<input type="hidden" name="date1" value="1">
+					<input type="hidden" name="date2" value="1">
+					<label>Price:<input type="text" class="form-control" placeholder="To " aria-controls="example1"
+							name="price1"></label>
+					<label><input type="text" class="form-control" placeholder="from" aria-controls="example1"
+							name="price2"></label>
+					<button type="submit" class="btn btn-lg btn-default">
+						<i class="fa fa-search"></i>
+					</button>
+				</form>
+			</div>
+
+		</div>
+		<div class="col-sm-12 col-md-6">
+			<div id="example1_filter" class="dataTables_filter">
+				<form method="post" th:action="@{/admin/room/index}" enctype="multipart/form-data">
+					<input type="hidden" name="search" value="2">
+					<input type="hidden" name="price1" value="1">
+					<input type="hidden" name="price2" value="1">
+					<label>Quantity Date:<input type="text" class="form-control" placeholder="To " 
+							name="date1"></label>
+					<label><input type="text" class="form-control" placeholder="from"
+							name="date2"></label>
+					<button type="submit" class="btn btn-lg btn-default">
+						<i class="fa fa-search"></i>
+					</button>
+				</form>
+			</div>
+
+		</div>
+		<!-- Main content -->
+		<div class="card">
+
+
+			<div class="card-body">
+				<div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
+					<div class="row">
+						<div class="col-sm-12">
+							<table id="example2" class="table table-bordered table-striped dataTable dtr-inline"
+								aria-describedby="example1_info">
+								<thead>
+									<tr>
+										<th class="sorting sorting_asc" tabindex="0" aria-controls="example1"
+											rowspan="1" colspan="1" aria-sort="ascending"
+											aria-label="Rendering engine: activate to sort column descending">Hotel
+										</th>
+										<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
+											colspan="1" aria-label="Browser: activate to sort column ascending">Fixed
+											Quantity
+										</th>
+										<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
+											colspan="1" aria-label="Browser: activate to sort column ascending">Room
+										</th>
+										<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
+											colspan="1" aria-label="Browser: activate to sort column ascending">Price
+										</th>
+										<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
+											colspan="1" aria-label="Browser: activate to sort column ascending">Quantity Date
+										</th>
+										<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
+											colspan="1" aria-label="Platform(s): activate to sort column ascending">
+											Created
+										</th>
+										<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
+											colspan="1" aria-label="Platform(s): activate to sort column ascending">
+											Updated
+										</th>
+										<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
+											colspan="1" aria-label="Platform(s): activate to sort column ascending">
+										</th>
+
+									</tr>
+								</thead>
+								<tbody th:if="${dateprices != null}">
+									<tr class="odd" th:each="dateprice :${dateprices}" >
+										<td class="dtr-control sorting_1" tabindex="0" th:text="${dateprice.room.hotel.name}">
+										</td>
+										<td th:text="${dateprice.room.fixedQuantity}"></td>
+										<td th:utext="${dateprice.room.content}"></td>
+										<td th:text="${dateprice.price}"></td>
+										<td th:text="${dateprice.quantityDate}"></td>
+										<td th:text="${dateprice.room.created}"></td>
+										<td th:text="${dateprice.room.updated}"></td>
+										<td class="project-actions text-center">
+											<a class="btn btn-info btn-sm" th:href="@{/admin/room/edit/}+${dateprice.room.id}" th:if="${dateprice.room.status == 1}">
+												<i class="fas fa-pencil-alt">
+												</i>
+												Edit
+											</a>
+											<a class="btn btn-info btn-sm" th:href="@{/admin/room/detail/}+${dateprice.room.id}" th:if="${dateprice.room.status == 1}">
+												
+												Detail
+											</a>
+											<a class="btn btn-danger btn-sm" th:if="${dateprice.room.status == 1}"
+												th:href="@{/admin/room/delete/}+${dateprice.room.id}">
+												<i class="fas fa-trash">
+												</i>
+												Delete
+											</a>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+		<!-- /.content -->
+	</div>
+
+
+</body>
+
+</html>

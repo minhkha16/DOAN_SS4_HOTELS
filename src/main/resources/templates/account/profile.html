@@ -1,0 +1,156 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	th:replace="~{layout/user :: content('profile',~{this :: #wrapper})}" xmlns:dialect="http://mytags.org">
+
+<body>
+	<div id="main">
+
+		<div id="wrapper">
+			<!-- content-->
+			<div class="content">
+				<!-- section-->
+				<section class="flat-header color-bg adm-header">
+					<div class="wave-bg wave-bg2"></div>
+					<div class="container">
+						<div class="dasboard-wrap fl-wrap">
+							<div class="dasboard-breadcrumbs breadcrumbs"><a href="/home">Home</a><span>Profile page</span></div>
+							<!--dasboard-sidebar-->
+							<div class="dasboard-sidebar">
+								<div class="dasboard-sidebar-content fl-wrap">
+									<div class="dasboard-avatar">
+										<img th:src="@{/assets/images/avatar/av.jpg}" alt="">
+									</div>
+									<div class="dasboard-sidebar-item fl-wrap">
+										<h3>
+											<span>Welcome </span>
+											<th:block th:text="${@accountService.getAccountByIdAccount(account.id).username}">
+											</th:block>
+										</h3>
+									</div>
+									<div class="user-stats fl-wrap">
+										<ul>
+											<li>
+												Created
+												<span>
+													<th:block
+														th:text="${#dates.format(@accountService.getAccountByIdAccount(account.id).created,'dd/MM/yyyy')}">
+													</th:block>
+												</span>
+
+											</li>
+											<li>
+												Bookings
+												<span>
+													<th:block th:text="${@bookRoomService.countBookRoomByIdAccount(account.id)}">
+													</th:block>
+												</span>
+											</li>
+											<li>
+												Reviews
+												<span>
+													<th:block th:text="${@evaluateService.countEvaluateByIdAccount(account.id)}">
+													</th:block>
+												</span>
+											</li>
+										</ul>
+									</div>
+									<a href="#" class="log-out-btn color-bg">Log Out <i class="far fa-sign-out"></i></a>
+								</div>
+							</div>
+							<!--dasboard-sidebar end-->
+							<!-- dasboard-menu-->
+							<div class="dasboard-menu">
+								<div class="dasboard-menu-btn color3-bg">Dashboard Menu <i class="fal fa-bars"></i>
+								</div>
+								<ul class="dasboard-menu-wrap">
+									<li>
+										<a th:href="@{/account/profile}" class="user-profile-act"><i
+												class="far fa-user"></i>Profile</a>
+										<ul>
+											<li><a th:href="@{/account/profile}">Edit profile</a></li>
+											<li><a th:href="@{/account/changepass}">Change Password</a></li>
+										</ul>
+									</li>
+
+									<li>
+										<a th:href="@{/account/booking?page=1}"><i class="far fa-th-list"></i> My Book
+										</a>
+										<ul>
+											<li><a href="#">Active</a><span>5</span></li>
+											<li><a href="#">Pending</a><span>2</span></li>
+											<li><a href="#">Expire</a><span>3</span></li>
+										</ul>
+									</li>
+
+								</ul>
+							</div>
+							<!--dasboard-menu end-->
+						</div>
+					</div>
+				</section>
+				<!-- section end-->
+				<!-- section-->
+				<section class="middle-padding">
+					<div class="container">
+						<!--dasboard-wrap-->
+						<div class="dasboard-wrap fl-wrap">
+							<!-- dashboard-content-->
+							<div class="dashboard-content fl-wrap">
+								<div class="box-widget-item-header">
+									<h3> Your Profile</h3>
+								</div>
+								<!-- profile-edit-container-->
+								<div class="profile-edit-container">
+									<div class="custom-form">
+										<form method="post" th:action="@{/account/update}"
+											enctype="multipart/form-data">
+											<label>Your Name <i class="far fa-user"></i></label>
+											<input type="text" name="fullname" th:value="${account.fullname}" />
+											<label>Email Address<i class="far fa-envelope"></i> </label>
+											<input type="text" name="email" th:value="${account.email}" readonly />
+											<label> Birthday <i class="far fa-calendar"></i> </label>
+											<input type="text" name="birthday" id="birthday"
+												th:value="${account.birthday}" />
+											<!--<label>Phone<i class="far fa-phone"></i>  </label>
+                                            <input type="text" placeholder="+7(123)987654" value=""/>-->
+											<label> Adress <i class="fas fa-map-marker"></i> </label>
+											<input type="text" name="address" th:value="${account.address}" />
+
+
+											<input type="hidden" th:field="${account.id}" />
+											<input type="hidden" th:field="${account.username}" />
+											<button class="btn color2-bg  float-btn">Save Changes<i
+													class="fal fa-save"></i></button>
+										</form>
+
+									</div>
+								</div>
+
+							</div>
+							<!-- dashboard-list-box end-->
+						</div>
+						<!-- dasboard-wrap end-->
+					</div>
+				</section>
+				<div class="limit-box fl-wrap"></div>
+			</div>
+			<!-- content end-->
+		</div>
+		<div class="map-modal-wrap">
+			<div class="map-modal-wrap-overlay"></div>
+			<div class="map-modal-item">
+				<div class="map-modal-container fl-wrap">
+					<h3>Hotel Title</h3>
+					<div class="map-modal fl-wrap">
+						<div id="singleMap" data-latitude="40.7" data-longitude="-73.1"></div>
+					</div>
+					<a href="#" class="btn color2-bg">View Details <i class="fal fa-angle-right"></i></a>
+					<div class="map-modal-close"><i class="far fa-times"></i></div>
+				</div>
+			</div>
+		</div>
+</body>
+
+<!-- Mirrored from easybook.kwst.net/dashboard-myprofile.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 30 Jan 2024 13:54:09 GMT -->
+
+</html>

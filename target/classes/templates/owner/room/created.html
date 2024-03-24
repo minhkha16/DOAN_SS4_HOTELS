@@ -1,0 +1,147 @@
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{layout/owner :: content('Create', ~{this :: .content-wrapper})}">
+<head>
+<title></title>
+</head>
+<body>
+
+	<div class="content-wrapper">
+		<!-- Content Header (Page header) -->
+		<section class="content-header">
+			<div class="container-fluid">
+				<div class="row mb-2">
+					<div 
+					style="text-align: right;position:relative; 
+							font-size:30px; 
+							color: white;
+							letter-spacing:0px; 
+							width:400px; text-align:center; 
+							margin:auto; white-space:nowrap; 
+							border:1px solid white;
+							border-radius: 50%;
+							padding:5px 11px 3px 11px;
+							background-color: 343a40;
+							font-family: Arial, Helvetica, sans-serif;
+							text-align:center;
+							text-transform:uppercase; ">
+						<h1>Add Room</h1>
+					</div>
+				</div>
+			</div>
+			<th:block th:if="${msg == 2}">
+				<div class="alert alert-danger alert-dismissible">
+					<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+					<h5><i class="icon fas fa-check"></i> False</h5>
+				</div>
+			</th:block>
+		</section>
+
+
+		<!-- Main content -->
+		<section class="content">
+			<form method="POST" th:action="@{/owner/room/created}" enctype="multipart/form-data">
+				<div class="form-group">
+					<label>Name</label>
+					<input type="text" class="form-control" placeholder="Enter the name" th:field="${room.content}">
+					<th:block th:if="${#fields.hasErrors('room.content')}">
+						<ul>
+							<li th:each="error : ${#fields.errors('room.content')}" 
+								th:text="${error}" class="error" style="color:red"></li>
+						</ul>
+					</th:block>
+				</div>
+				<div class="form-group">
+					<label>Number of room</label>
+					<input type="text" class="form-control" placeholder="Enter the Number of room" th:field="${room.fixedQuantity}">
+					<th:block th:if="${#fields.hasErrors('room.fixedQuantity')}">
+						<ul>
+							<li th:each="error : ${#fields.errors('room.fixedQuantity')}" 
+								th:text="${error}" class="error" style="color:red"></li>
+						</ul>
+					</th:block>
+				</div>
+				<div class="form-group">
+				   <label for="exampleSelectRounded0">Hotel</label>
+				   <select class="custom-select rounded-0" id="exampleSelectRounded0" th:field="${room.hotel}">
+				      <th:block th:each="ht : ${hotels}">
+							<option th:value="${ht.id}" th:text="${ht.name}"></option>
+						</th:block>
+				   </select>
+				</div>
+				<div class="form-group">
+					<label>Quantity date</label>
+					<input type="text" class="form-control" placeholder="Enter the Quantity date" th:field="${dateprice.quantityDate}">
+					<th:block th:if="${#fields.hasErrors('dateprice.quantityDate')}">
+						<ul>
+							<li th:each="error : ${#fields.errors('dateprice.quantityDate')}" 
+								th:text="${error}" class="error" style="color:red"></li>
+						</ul>
+					</th:block>
+				</div>
+				<div class="form-group">
+					<label>Price</label>
+					<input type="text" class="form-control" placeholder="Enter the Price" th:field="${dateprice.price}">
+					<th:block th:if="${#fields.hasErrors('dateprice.price')}">
+						<ul>
+							<li th:each="error : ${#fields.errors('dateprice.price')}" 
+								th:text="${error}" class="error" style="color:red"></li>
+						</ul>
+					</th:block>
+				</div>
+				<div class="form-group">
+					<label>Bed</label>
+					<input type="text" class="form-control" placeholder="Enter the Bed" th:field="${kindor.bed}">
+					<th:block th:if="${#fields.hasErrors('kindor.bed')}">
+						<ul>
+							<li th:each="error : ${#fields.errors('kindor.bed')}" 
+								th:text="${error}" class="error" style="color:red"></li>
+						</ul>
+					</th:block>
+				</div>
+				<div class="form-group">
+					<label>Quality</label>
+					<input type="text" class="form-control" placeholder="Enter the Quality" th:field="${kindor.quality}">
+					<th:block th:if="${#fields.hasErrors('kindor.quality')}">
+						<ul>
+							<li th:each="error : ${#fields.errors('kindor.quality')}" 
+								th:text="${error}" class="error" style="color:red"></li>
+						</ul>
+					</th:block>
+				</div>
+				<div class="form-group">
+					<label>Other</label>
+					<input type="text" class="form-control" placeholder="Enter the Other" th:field="${kindor.orther}">
+					<th:block th:if="${#fields.hasErrors('kindor.orther')}">
+						<ul>
+							<li th:each="error : ${#fields.errors('kindor.orther')}" 
+								th:text="${error}" class="error" style="color:red"></li>
+						</ul>
+					</th:block>
+				</div>
+				<div class="custom-control custom-checkbox">
+				   <input class="custom-control-input" type="checkbox" id="customCheckbox1" th:field="${kindor.balcony}">
+				   <label for="customCheckbox1" class="custom-control-label">Balcony</label>
+				</div>
+				<div class="form-group" style="margin-top: 10px;">
+				   <label for="exampleInputFile">File input</label>
+				   <div class="input-group">
+				      <div class="custom-file">
+				         <input type="file" class="custom-file-input" id="exampleInputFile" name="files" multiple>
+				         <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+				      </div>
+				      <div class="input-group-append">
+				         <span class="input-group-text">Upload</span>
+				      </div>
+				   </div>
+				</div>
+				<div class="card-footer">
+					<button type="submit" class="btn btn-block bg-gradient-secondary btn-lg"><i class="fas fa-plus"></i> </button>
+				</div>
+			</form>
+		</section>
+		<!-- /.content -->
+	</div>
+
+
+</body>
+</html>

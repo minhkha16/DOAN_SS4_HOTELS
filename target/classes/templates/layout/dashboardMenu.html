@@ -1,0 +1,23 @@
+<div class="dasboard-menu" th:fragment="dashboardMenu">
+    <div class="dasboard-menu-btn color3-bg">Dashboard Menu <i class="fal fa-bars"></i></div>
+    <ul class="dasboard-menu-wrap">
+        <li>
+            <a th:href="@{/admin/account/profile}"><i class="far fa-user"></i>Profile</a>
+            <ul>
+                <li><a th:href="@{/admin/account/profile}">Edit profile</a></li>
+                <li><a th:href="@{/admin/account/changepass}">Change Password</a></li>
+            </ul>
+        </li>
+        
+        <li>
+            <a th:href="@{/admin/account/mylist_booking}"><i class="far fa-th-list"></i> My listigs  </a>
+            <ul>
+                <li><a href="#">Active</a><span>5</span></li>
+                <li><a href="#">Pending</a><span>2</span></li>
+                <li><a href="#">Expire</a><span>3</span></li>
+            </ul>
+        </li>
+        <li><a th:href="@{/admin/account/bookings}" class="user-profile-act"> <i class="far fa-calendar-check"></i> Bookings <span>2</span></a></li>
+        
+    </ul>
+</div>

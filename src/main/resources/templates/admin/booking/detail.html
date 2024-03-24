@@ -1,0 +1,75 @@
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{layout/admin :: content('Room List', ~{this :: .content-wrapper})}">
+
+<head>
+	<title></title>
+</head>
+
+<body>
+
+	<div class="content-wrapper">
+		<!-- Content Header (Page header) -->
+		<section class="content-header">
+			<div class="container-fluid">
+				<div class="row mb-2">
+					<div class="col-sm-6">
+						<h1>List Booking</h1>
+					</div>
+				</div>
+			</div>
+			<!-- /.container-fluid -->
+		</section>
+		<!-- Main content -->
+		<div class="card">
+
+
+			<div class="card-body">
+				<div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
+					<div class="row">
+						<div class="col-sm-12">
+							<table id="example2" class="table table-bordered table-striped dataTable dtr-inline"
+								aria-describedby="example1_info">
+								<thead>
+									<tr>
+										<th class="sorting sorting_asc" tabindex="0" aria-controls="example1"
+											rowspan="1" colspan="1" aria-sort="ascending"
+											aria-label="Rendering engine: activate to sort column descending">Room
+										</th>
+										<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
+											colspan="1" aria-label="Browser: activate to sort column ascending">Price
+										</th>
+										<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
+											colspan="1" aria-label="Browser: activate to sort column ascending">Quantity Room
+										</th>
+										<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
+											colspan="1" aria-label="Browser: activate to sort column ascending">Quantity Date
+										</th>
+										<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
+											colspan="1" aria-label="Browser: activate to sort column ascending">Created
+										</th>
+									</tr>
+								</thead>
+								<tbody th:if="${bookingRooms != null}">
+									<tr class="odd" th:each="bookingroom :${bookingRooms}">
+										
+										<td lass="dtr-control sorting_1" tabindex="0" th:utext="${bookingroom.datePrice.room.content}"></td>
+										<td th:text="${bookingroom.price}"></td>
+										<td th:text="${bookingroom.quantity}"></td>
+										<td th:text="${bookingroom.datePrice.quantityDate}"></td>
+										<td th:text="${bookingroom.created}"></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+		<!-- /.content -->
+	</div>
+
+
+</body>
+
+</html>

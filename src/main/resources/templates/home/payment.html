@@ -1,0 +1,264 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	th:replace="~{layout/user :: content('change password',~{this :: #wrapper})}" xmlns:dialect="http://mytags.org">
+
+<body>
+
+	<div id="wrapper">
+		<!-- content-->
+		<div class="content">
+			<div class="breadcrumbs-fs fl-wrap">
+				<div class="container">
+					<div class="breadcrumbs fl-wrap"><a href="#">Home</a><a href="#">Pages</a><span>Booking Page</span>
+					</div>
+				</div>
+			</div>
+			<section class="middle-padding gre y-blue-bg">
+				<div class="container">
+					<div class="list-main-wrap-title single-main-wrap-title fl-wrap">
+						<h2>Booking form for : <span><th:block th:text="${room.content}"></th:block></span></h2>
+					</div>
+					<div class="row">
+						<div class="col-md-8">
+							<div class="bookiing-form-wrap">
+								<ul id="progressbar">
+									<th:block th:if="${check_pay==0}">
+										<li class="active"><span>01.</span>Personal Info</li>
+										<li><span>02.</span>Payment Method</li>
+										<li><span>03.</span>Confirm</li>
+									</th:block>
+
+									<th:block th:if="${check_pay==1}">
+										<li><span>01.</span>Personal Info</li>
+										<li><span>02.</span>Payment Method</li>
+										<li class="active"><span>03.</span>Confirm</li>
+
+									</th:block>
+
+								</ul>
+								<!--   list-single-main-item -->
+								<th:block th:if="${check_pay==0}">
+
+									<div class="list-single-main-item fl-wrap hidden-section tr-sec">
+										<div class="profile-edit-container">
+											<div class="custom-form">
+												<form method="post"
+													action="https://www.sandbox.paypal.com/cgi-bin/webscr">
+
+													<input type="hidden" name="item_number_1" th:value="${room.id}">
+													<input type="hidden" name="item_name_1" th:value="${room.content}">
+													<input type="hidden" name="amount_1" th:value="${price}+'.0'">
+													<input type="hidden" name="quantity_1"
+														th:value="${quantity_room*quantityday}">
+													<input type="hidden" name="upload" value="1" />
+													<input type="hidden" name="return" th:value="${returnurl}" />
+													<input type="hidden" name="cmd" value="_cart" />
+													<input type="hidden" name="business"
+														value="sb-qfgfz27579779@business.example.com" />
+
+
+													<fieldset id="start" class="fl-wrap book_mdf">
+														<div class="list-single-main-item-title fl-wrap">
+															<h3 id="alertMain">Your personal Information</h3>
+														</div>
+														<div class="row">
+															<div class="col-sm-6">
+																<label>First Name <i class="far fa-user"></i></label>
+																<input type="text" id="fullnameinbook"
+																	name="fullnameinbook" placeholder="Your Full Name"
+																	onkeyup="checkFullnameBook()" value="" />
+																<th:block>
+															</div>
+															<div class="col-sm-6">
+																<label>CCCD:<i class="far fa-envelope"></i>
+																</label>
+																<input type="text" placeholder="012345678910" id="cccd"
+																	name="cccd" onkeyup="checkCccdBook()" value="" />
+															</div>
+														</div>
+														<div class="row">
+															<div class="col-sm-6">
+																<label>Email:<i class="far fa-envelope"></i>
+																</label>
+																<input type="text" id="emailbook" name="emailbook"
+																	onkeyup="checkEmailBook()"
+																	th:value="${account.email}" disabled />
+															</div>
+															<div class="col-sm-6">
+																<label>Phone<i class="far fa-phone"></i> </label>
+																<input type="text" placeholder="0999999999" id="phone"
+																	name="phone" onkeyup="checkPhoneBook()" value="" />
+															</div>
+
+														</div>
+														<div class="row" id="add1">
+
+														</div>
+														<div class="filter-tags">
+															<input id="check-a" type="radio" name="check"
+																onchange="checkRadioBook()" value="self-book" checked>
+															<label for="check-a">Self-book</a></label>
+															<input id="check-b" type="radio" name="check"
+																onchange="checkRadioBook()" value="bookforfriend">
+															<label for="check-b">Bookforfriend</a></label>
+														</div>
+
+
+														<span class="fw-separator" id="flag"></span>
+
+														<a href="#" id="billingAddressLink"
+															class="next-form action-button btn no-shdow-btn color-bg">Billing
+															Address1 <i class="fal fa-angle-right"></i></a>
+
+													</fieldset>
+													<button type="submit" id="submitform1"></button>
+
+													<fieldset id="end" class="fl-wrap book_mdf">
+														<div class="list-single-main-item-title fl-wrap">
+															<h3>Payment method</h3>
+														</div>
+														<div class="soc-log fl-wrap">
+															<p>Select Other Payment Method <th:block
+																	th:text="${posturl}">
+																</th:block>
+															</p>
+
+															<button type="submit"><a class="paypal-log"><i
+																		class="fab fa-paypal"
+																		onclick="onClickDouble()"></i>Pay With Paypal
+																</a></button>
+														</div>
+														<span class="fw-separator"></span>
+														<a href="#"
+															class="previous-form  back-form action-button    color-bg"><i
+																class="fal fa-angle-left"></i> Back</a>
+													</fieldset>
+
+													<fieldset class="fl-wrap book_mdf">
+														<div class="list-single-main-item-title fl-wrap">
+															<h3>Confirmation</h3>
+														</div>
+														<div class="success-table-container">
+															<div class="success-table-header fl-wrap">
+																<i class="fal fa-check-circle decsth"></i>
+																<h4>Thank you. Your reservation has been received.</h4>
+																<div class="clearfix"></div>
+																<p>Your payment has been processed successfully.</p>
+																<a th:href="@{/account/invoice}" target="_blank"
+																	class="color-bg">View Invoice</a>
+															</div>
+														</div>
+														<span class="fw-separator"></span>
+													</fieldset>
+
+												</form>
+											</div>
+										</div>
+									</div>
+								</th:block>
+								<th:block th:if="${check_pay==1}">
+									<div class="list-single-main-item fl-wrap hidden-section tr-sec">
+										<div class="profile-edit-container">
+											<div class="custom-form">
+
+												<fieldset class="fl-wrap book_mdf">
+													<div class="list-single-main-item-title fl-wrap">
+														<h3>Confirmation</h3>
+													</div>
+													<div class="success-table-container">
+														<div class="success-table-header fl-wrap">
+															<i class="fal fa-check-circle decsth"></i>
+															<h4>Thank you. Your reservation has been received.</h4>
+															<div class="clearfix"></div>
+															<p>Your payment has been processed successfully.</p>
+															<a th:href="@{'/account/book_detail?id_bookroom='+${id_bookroom}}"
+																target="_blank" class="color-bg">View Invoice</a>
+														</div>
+													</div>
+													<span class="fw-separator"></span>
+													<a href="#"
+														class="previous-form action-button  back-form   color-bg"><i
+															class="fal fa-angle-left"></i> Back</a>
+												</fieldset>
+
+											</div>
+										</div>
+									</div>
+								</th:block>
+
+								<!--   list-single-main-item end -->
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="box-widget-item-header">
+								<h3> Your cart</h3>
+							</div>
+							<!--cart-details  -->
+							<div class="cart-details fl-wrap">
+								<!--cart-details_header-->
+								<div class="cart-details_header">
+									<a href="#" class="widget-posts-img"><img th:src="@{/assets/images/gal/3.jpg}"
+											class="respimg" alt=""></a>
+									<div class="widget-posts-descr">
+										<a href="#" title="">
+											<th:block th:text="${room.hotel.name}"></th:block>
+										</a>
+										<div class="listing-rating card-popup-rainingvis"
+											th:data-starrating2="${room.hotel.category.id}"></div>
+										<div class="geodir-category-location fl-wrap"><a href="#"><i
+													class="fas fa-map-marker-alt"></i>
+												<th:block th:text="${room.hotel.address}"></th:block>
+											</a></div>
+									</div>
+								</div>
+								<!--cart-details_header end-->
+								<!--ccart-details_text-->
+								<div class="cart-details_text">
+									<ul class="cart_list">
+										<li>Room Type <span>
+												<th:block th:text="${room.content}"></th:block><strong>$<th:block
+														th:text="${price}"></th:block> </strong>
+											</span></li>
+										<li>Rooms<span>
+												<th:block th:text="${quantity_room}"></th:block>
+											</span></li>
+										<li>From <span>
+												<th:block th:text="${from}"></th:block>
+											</span></li>
+										<li>To <span>
+												<th:block th:text="${to}"></th:block>
+											</span></li>
+										<li>Days<span>
+												<th:block th:text="${quantityday}"></th:block>
+											</span></li>
+									</ul>
+								</div>
+								<!--cart-details_text end -->
+							</div>
+							<!--cart-details end -->
+							<!--cart-total -->
+							<div class="cart-total">
+								<span class="cart-total_item_title">Total Cost</span>
+								<strong>$<th:block th:text="${grand_total}"></strong>
+							</div>
+							<!--cart-total end -->
+						</div>
+					</div>
+				</div>
+				<form method="post" th:action="@{/account/saveinfo}">
+					<input type="hidden" name="fullnamesave" id="fullnamesave" value="">
+					<input type="hidden" name="cccdsave" id="cccdsave" value="">
+					<input type="hidden" name="emailsave" id="emailsave" value="">
+					<input type="hidden" name="phonesave" id="phonesave" value="">
+				</form>
+			</section>
+			<!-- section end -->
+		</div>
+		<!-- content end-->
+	</div>
+
+</body>
+
+<!-- Mirrored from easybook.kwst.net/booking-single.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 30 Jan 2024 13:57:00 GMT -->
+
+</html>

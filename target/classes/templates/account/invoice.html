@@ -1,0 +1,146 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	th:replace="~{layout/user :: content('trang chuuu1',~{this :: .invoice-box})}" xmlns:dialect="http://mytags.org">
+<div class="invoice-box">
+	<table>
+		<tr class="top">
+			<td colspan="2">
+				<table>
+					<tr>
+						<td class="title">
+							<img th:src="@{/assets/images/logo2.png}" style="width:150px; height:auto" alt="">
+						</td>
+						<td>
+							Invoice #: <th:block th:text="${bookroom.book.id}"></th:block><br>
+							Created: <th:block th:text="${bookroom.book.created}"></th:block><br>
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+		<tr class="information">
+			<td colspan="2">
+				<table>
+					<tr>
+						<td>
+							Easybook , Inc.</th:block><br>
+							<th:block th:text="${admin.address}"></th:block><br>
+							<a href="#" style="color:#666; text-decoration:none">
+								<th:block th:text="${admin.email}">
+							</a>
+							<br>
+							<a href="#" style="color:#666; text-decoration:none">+4(333)123456</a>
+						</td>
+						<td>
+							<th:block th:text="${bookroom.book.account.fullname}"></th:block><br><br>
+							<a href="#" style="color:#666; text-decoration:none">
+								<th:block th:text="${bookroom.book.account.email}"></th:block>
+							</a>
+							<br>
+							<a href="#" style="color:#666; text-decoration:none">+7(123)987654</a>
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+		<tr class="heading">
+			<td>
+				Payment Method
+			</td>
+			<td>
+				#Check
+			</td>
+		</tr>
+		<tr class="details">
+			<td>
+				Paypal
+			</td>
+			<td>
+				<th:block th:text="${bookroom.book.status}"></th:block>
+			</td>
+		</tr>
+		<tr class="heading">
+			<td>
+				Option
+			</td>
+			<td>
+				Details
+			</td>
+		</tr>
+		<tr class="item">
+			<td>
+				Hotel
+			</td>
+			<td>
+				<th:block th:text="${bookroom.datePrice.room.hotel.name}"></th:block>
+			</td>
+		</tr>
+		<tr class="item ">
+			<td>
+				Address
+			</td>
+			<td>
+				<th:block th:text="${bookroom.datePrice.room.hotel.address}"></th:block>
+			</td>
+		</tr>
+		<tr class="item">
+			<td>
+				Room Type
+			</td>
+			<td>
+				<th:block th:text="${bookroom.datePrice.room.content}"></th:block>
+			</td>
+		</tr>
+		<tr class="item ">
+			<td>
+				Price:
+			</td>
+			<td>
+				$<th:block th:text="${bookroom.price}">
+			</td>
+		</tr>
+		<tr class="item ">
+			<td>
+				Quantity Room:
+			</td>
+			<td>
+				<th:block th:text="${bookroom.quantity}"></th:block>
+			</td>
+		</tr>
+		<tr class="item ">
+			<td>
+				From
+			</td>
+			<td>
+				<th:block th:text="${#dates.format(from,'dd/MM/yyyy')}">
+				</th:block>
+			</td>
+		</tr>
+		<tr class="item ">
+			<td>
+				To
+			</td>
+			<td>
+				<th:block th:text="${#dates.format(to,'dd/MM/yyyy')}">
+				</th:block>
+			</td>
+		</tr>
+		<tr class="item last">
+			<td>
+				Days
+			</td>
+			<td>
+				<th:block th:text="${bookroom.datePrice.quantityDate}"></th:block>
+			</td>
+		</tr>
+		<tr class="total">
+			<td></td>
+			<td style="padding-top:50px;">
+				Total: $<th:block th:text="${bookroom.book.total}"></th:block>
+			</td>
+		</tr>
+	</table>
+</div>
+<!-- Mirrored from easybook.kwst.net/invoice.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 30 Jan 2024 13:57:11 GMT -->
+
+</html>

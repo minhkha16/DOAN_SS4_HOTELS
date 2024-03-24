@@ -1,0 +1,133 @@
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{layout/owner :: content('Room', ~{this :: .content-wrapper})}">
+<head>
+<title></title>
+</head>
+<body>
+
+	<div class="content-wrapper">
+		<section class="content-header">
+			<div class="container-fluid">
+				<div class="row mb-2">
+					<div 
+					style="text-align: right;position:relative; 
+							font-size:30px; 
+							color: white;
+							letter-spacing:0px; 
+							width:400px; text-align:center; 
+							margin:auto; white-space:nowrap; 
+							border:1px solid white;
+							border-radius: 50%;
+							padding:5px 11px 3px 11px;
+							background-color: 343a40;
+							font-family: Arial, Helvetica, sans-serif;
+							text-align:center;
+							text-transform:uppercase; ">
+						<h1>Room</h1>
+					</div>
+				</div>
+			</div>
+			<th:block th:if="${msg == 1}">
+				<div class="alert alert-success alert-dismissible">
+					<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+					<h5><i class="icon fas fa-check"></i> Success</h5>
+				</div>
+			</th:block>
+			<th:block th:if="${msg == 2}">
+				<div class="alert alert-danger alert-dismissible">
+					<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+					<h5><i class='icon fas fa-ban'></i>False</h5>
+				</div>
+			</th:block>
+		</section>
+		<div style="margin-left: 27px; position: absolute;">
+			<a th:href="@{/owner/room/created}">
+			<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#modal-primary" >
+				Create Room
+			</button>
+			</a>
+		</div>
+
+		<!-- Main content -->
+		<section class="content">
+			<div style="display: flex;">
+				<!--<form method="get" th:action="@{/owner/room/findByContent}">
+					
+					<div style="display: flex; align-items: center; padding-left: 10%;">
+						<div style="margin: 0 10px">
+							<input type="text" name="content"
+								style="border-radius: 5px;" placeholder="Start name...">
+						</div>
+						<button type="submit"
+							style="width:40; height: 40; outline: none; padding: 8px; border-radius: 50%; align-items: center;">
+							<i class="fas fa-search"></i>
+						</button>
+	
+					</div>
+				
+				</form>
+				-->
+			
+			<div style="position: absolute; left: 25%;" class="form-group">
+	                 <form method="GET" th:action="@{/owner/room/filterByDate}">
+	                  <div style="display: flex; align-items: center;">
+	                     <div style="margin: 0 10px">
+	                        <input type="text" id="datepicker1" name="from"
+	                           class="form-control" placeholder="Start date...">
+	                     </div>
+	                     <div style="margin-right: 10px">
+	                        <input type="text" id="datepicker2" name="to"
+	                          class="form-control" placeholder="End date...">
+	                     </div>
+	                     <button type="submit"
+	                        style="width:40; height: 40; padding: 8px; border-radius: 50%; align-items: center;">
+	                     <i class="fas fa-search"></i>
+	                     </button>
+	                  </div>
+	               </form>
+               </div>
+			</div>
+				
+				
+			<div class="card-body">
+				<table id="example3" class="table table-bordered table-striped">
+					<thead>
+						<tr align="center">
+								<th>STT</th>
+								<th>Name</th>
+								<th>Image</th>
+								<th>Numeber of room</th>
+								<th>Price</th>
+								<th>Date</th>
+								<th>Hotel</th>
+								<th>Created</th>
+								<th>Updated</th>
+								<th></th>
+								<th></th>
+								<!--<th>Delete</th>-->
+							</tr>
+					</thead>
+					<tbody>
+							<tr align="center" th:each="room : ${rooms}"  th:if="${room.hotel.status == 1}">
+								<td th:text="${room.id}"></td>
+								<td th:utext="${room.content}"></td>
+								<td><a th:href="@{'/owner/room/details_KindOfRoom/' + ${room.id}}" ><i class='fa fa-bed'></i></a></td>
+								<td th:text="${room.fixedQuantity}"></td>
+								<td th:each="qty : ${room.datePrices}" th:text="${qty.price}">
+								<td th:each="qty : ${room.datePrices}" th:text="${qty.quantityDate}">
+								<td th:text="${room.hotel.name}"></td>
+								<td th:text="${room.created}"></td>
+								<td th:text="${room.updated}"></td>
+								<td><a class="btn btn-info btn-sm" th:href="@{'/owner/book_room/detailsBookByRoom/' + ${room.id}}"><i class='fa fa-eye'></i></a></td>
+								<td><a class="btn btn-info btn-sm" th:href="@{'/owner/room/edit/' + ${room.id}}"><i class="fas fa-pencil-alt"></i></a></td>
+							</tr>
+						</tbody>
+				</table>
+			</div>
+		</section>
+		<!-- /.content -->
+	</div>
+
+
+</body>
+</html>

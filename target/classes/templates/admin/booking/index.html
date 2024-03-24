@@ -1,0 +1,106 @@
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{layout/admin :: content('Room List', ~{this :: .content-wrapper})}">
+
+<head>
+	<title></title>
+</head>
+
+<body>
+
+	<div class="content-wrapper">
+		<!-- Content Header (Page header) -->
+		<section class="content-header">
+			<div class="container-fluid">
+				<div class="row mb-2">
+					<div class="col-sm-6">
+						<h1>List Booking</h1>
+					</div>
+				</div>
+			</div>
+			<!-- /.container-fluid -->
+		</section>
+
+		<div class="col-sm-12 col-md-6">
+			<div id="example1_filter" class="dataTables_filter">
+				<form method="post" th:action="@{/admin/booking/index}" enctype="multipart/form-data">
+					<label>Code:<input type="text" class="form-control" placeholder="Code Booking" aria-controls="example1"
+							name="code"></label>
+					<button type="submit" class="btn btn-lg btn-default">
+						<i class="fa fa-search"></i>
+					</button>
+				</form>
+			</div>
+
+		</div>
+		<!-- Main content -->
+		<div class="card">
+
+
+			<div class="card-body">
+				<div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
+					<div class="row">
+						<div class="col-sm-12">
+							<table id="example2" class="table table-bordered table-striped dataTable dtr-inline"
+								aria-describedby="example1_info">
+								<thead>
+									<tr>
+										<th class="sorting sorting_asc" tabindex="0" aria-controls="example1"
+											rowspan="1" colspan="1" aria-sort="ascending"
+											aria-label="Rendering engine: activate to sort column descending">Code Booking
+										</th>
+										<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
+											colspan="1" aria-label="Browser: activate to sort column ascending">Total
+										</th>
+										<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
+											colspan="1" aria-label="Browser: activate to sort column ascending">Booking Day
+										</th>
+										<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
+											colspan="1" aria-label="Browser: activate to sort column ascending">Note
+										</th>
+										<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
+											colspan="1" aria-label="Platform(s): activate to sort column ascending">
+											Created
+										</th>
+										<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
+											colspan="1" aria-label="Platform(s): activate to sort column ascending">
+											Updated
+										</th>
+										<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
+											colspan="1" aria-label="Platform(s): activate to sort column ascending">
+										</th>
+
+									</tr>
+								</thead>
+								<tbody th:if="${bookings != null}">
+									<tr class="odd" th:each="booking :${bookings}">
+										
+										<td lass="dtr-control sorting_1" tabindex="0" th:text="${booking.codeBook}"></td>
+										<td th:text="${booking.total}"></td>
+										<td th:text="${booking.date}"></td>
+										<td th:text="${booking.note}"></td>
+										<td th:text="${booking.created}"></td>
+										<td th:text="${booking.updated}"></td>
+										<td class="project-actions text-center">
+											<a class="btn btn-danger btn-sm"
+												th:href="@{/admin/booking/detail/}+${booking.id}">
+												<i class="fas fa-trash">
+												</i>
+												Details
+											</a>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+		<!-- /.content -->
+	</div>
+
+
+</body>
+
+</html>

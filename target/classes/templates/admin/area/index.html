@@ -1,0 +1,133 @@
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{layout/admin :: content('Area List', ~{this :: .content-wrapper})}">
+
+<head>
+	<title></title>
+</head>
+
+<body>
+
+	<div class="content-wrapper">
+		<th:block th:if="${msg == 1}">
+			<div class="alert alert-success alert-dismissible">
+				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+				<h5><i class="icon fas fa-check"></i> Add Success!</h5>
+
+			</div>
+		</th:block>
+		<th:block th:if="${msg == 2}">
+			<div class="alert alert-success alert-dismissible">
+				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+				<h5><i class="icon fas fa-check"></i> Edit Success!</h5>
+			</div>
+		</th:block>
+		<th:block th:if="${msg == 3}">
+			<div class="alert alert-success alert-dismissible">
+				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+				<h5><i class="icon fas fa-check"></i> Delete Success!</h5>
+			</div>
+		</th:block>
+		<!-- Content Header (Page header) -->
+		<section class="content-header">
+			<div class="container-fluid">
+				<div class="row mb-2">
+					<div class="col-sm-6">
+						<h1>Area List</h1>
+					</div>
+				</div>
+			</div>
+			<!-- /.container-fluid -->
+		</section>
+
+		<!-- Main content -->
+		<div class="card">
+
+
+			<div class="card-body">
+				<div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
+					<div class="row">
+						<!--<div class="col-sm-12 col-md-6">
+							<div class="dt-buttons btn-group flex-wrap"> <button
+									class="btn btn-secondary buttons-copy buttons-html5" tabindex="0"
+									aria-controls="example1" type="button"><span>Copy</span></button> <button
+									class="btn btn-secondary buttons-csv buttons-html5" tabindex="0"
+									aria-controls="example1" type="button"><span>CSV</span></button> <button
+									class="btn btn-secondary buttons-excel buttons-html5" tabindex="0"
+									aria-controls="example1" type="button"><span>Excel</span></button> <button
+									class="btn btn-secondary buttons-pdf buttons-html5" tabindex="0"
+									aria-controls="example1" type="button"><span>PDF</span></button> <button
+									class="btn btn-secondary buttons-print" tabindex="0" aria-controls="example1"
+									type="button"><span>Print</span></button>
+								<div class="btn-group"><button
+										class="btn btn-secondary buttons-collection dropdown-toggle buttons-colvis"
+										tabindex="0" aria-controls="example1" type="button"
+										aria-haspopup="true"><span>Column visibility</span><span
+											class="dt-down-arrow"></span></button></div>
+							</div>
+						</div>-->
+						<div class="col-sm-12 col-md-6">
+							<div id="example1_filter" class="dataTables_filter">
+								<form th:if="${check == 1}" method="post" th:action="@{/admin/area/created}"
+									enctype="multipart/form-data">
+									<label>Add Name:<input type="text" class="form-control form-control-sm" placeholder=""
+											aria-controls="example1" th:field="${a.name}"></label>
+									<label><input type="submit" class="form-control form-control-sm" value="Add"
+											style="background-color: aqua;" aria-controls="example1"></label>
+								</form>
+								<form th:if="${check == 2}" method="post" th:action="@{/admin/area/edit}"
+									enctype="multipart/form-data">
+									<label>Edit Name:<input type="text" class="form-control form-control-sm" placeholder=""
+											aria-controls="example1" th:field="${a.name}"></label>
+									<label><input type="submit" class="form-control form-control-sm" value="Edit"
+											style="background-color: aqua;" aria-controls="example1"></label>
+									<input type="hidden" th:field="${a.id}">
+								</form>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-12">
+							<table id="example2"class="table table-bordered table-striped">
+								<thead>
+									<tr>
+										<th class="sorting sorting_asc" tabindex="0" aria-controls="example1"
+											rowspan="1" colspan="1" aria-sort="ascending"
+											aria-label="Rendering engine: activate to sort column descending">Name</th>
+										<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
+											colspan="1" aria-label="Platform(s): activate to sort column ascending">
+											
+										</th>
+									</tr>
+								</thead>
+								<tbody th:if="${areas != null}">
+									<tr class="odd" th:each="area :${areas}">
+										<td class="dtr-control sorting_1" tabindex="0" th:text="${area.name}"></td>
+										<td class="project-actions text-center">
+											<a class="btn btn-info btn-sm" th:href="@{/admin/area/edit/}+${area.id}">
+												<i class="fas fa-pencil-alt">
+												</i>
+												Edit
+											</a>
+											<a class="btn btn-danger btn-sm"
+												th:href="@{/admin/area/delete/}+${area.id}">
+												<i class="fas fa-trash">
+												</i>
+												Delete
+											</a>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					</div>
+			</div>
+
+		</div>
+		<!-- /.content -->
+	</div>
+
+
+</body>
+
+</html>

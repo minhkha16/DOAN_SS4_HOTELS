@@ -1,0 +1,119 @@
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{layout/admin :: content('Hotel List', ~{this :: .content-wrapper})}">
+
+<head>
+	<title></title>
+</head>
+
+<body>
+
+	<div class="content-wrapper">
+		<th:block th:if="${msg == 1}">
+			<div class="alert alert-success alert-dismissible">
+				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+				<h5><i class="icon fas fa-check"></i> Add Success!</h5>
+
+			</div>
+		</th:block>
+		<th:block th:if="${msg == 2}">
+			<div class="alert alert-success alert-dismissible">
+				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+				<h5><i class="icon fas fa-check"></i> Edit Success!</h5>
+			</div>
+		</th:block>
+		<th:block th:if="${msg == 3}">
+			<div class="alert alert-success alert-dismissible">
+				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+				<h5><i class="icon fas fa-check"></i> Delete Success!</h5>
+			</div>
+		</th:block>
+		<!-- Content Header (Page header) -->
+		<section class="content-header">
+			<div class="container-fluid">
+				<div class="row mb-2">
+					<div class="col-sm-6">
+						<h1>List Hotel</h1>
+					</div>
+				</div>
+			</div>
+			<!-- /.container-fluid -->
+		</section>
+
+		<!-- Main content -->
+		<div class="card">
+
+
+			<div class="card-body">
+				<div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
+					<div class="row">
+						<div class="col-sm-12 col-md-6">
+							<div id="example1_filter">
+								<form method="post" th:action="@{/admin/hotel/index}" enctype="multipart/form-data">
+									<label>Name:<input type="text" class="form-control" placeholder="Search Name"
+											aria-controls="example1" name="keyword"></label>
+									<button type="submit" class="btn btn-lg btn-default">
+										<i class="fa fa-search"></i>
+									</button>
+								</form>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-12">
+							<table id="example2" class="table table-bordered table-striped dataTable dtr-inline"
+								aria-describedby="example1_info">
+								<thead>
+									<tr>
+										<th class="sorting sorting_asc" tabindex="0" aria-controls="example1"
+											rowspan="1" colspan="1" aria-sort="ascending"
+											aria-label="Rendering engine: activate to sort column descending">Content
+										</th>
+										<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
+											colspan="1" aria-label="Browser: activate to sort column ascending">Star
+										</th>
+										<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
+											colspan="1" aria-label="Browser: activate to sort column ascending">Hotel
+											Name
+										</th>
+										<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
+											colspan="1" aria-label="Platform(s): activate to sort column ascending">
+											User Name</th>
+										<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
+											colspan="1" aria-label="Platform(s): activate to sort column ascending">
+
+										</th>
+
+									</tr>
+								</thead>
+								<tbody th:if="${evaluetes != null}">
+									<tr class="odd" th:each="evaluete :${evaluetes}">
+										<td class="dtr-control sorting_1" tabindex="0" th:text="${evaluete.content}">
+										</td>
+										<td th:text="${evaluete.star}"></td>
+										<td th:utext="${evaluete.hotel.name}"></td>
+										<td th:text="${evaluete.account.fullname}"></td>
+										<td class="project-actions text-center">
+											<a class="btn btn-info btn-sm"
+												th:href="@{/admin/evaluete/edit/}+${evaluete.id}"
+												th:if="${evaluete.status != true}">
+												Accept
+											</a>
+										</td>
+									</tr>
+								</tbody>
+								
+							</table>
+						</div>
+					</div>
+					
+				</div>
+			</div>
+
+		</div>
+		<!-- /.content -->
+	</div>
+
+
+</body>
+
+</html>

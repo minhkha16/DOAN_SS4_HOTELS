@@ -1,0 +1,312 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	th:replace="~{layout/user :: content('trang chuuu1',~{this :: #wrapper})}" xmlns:dialect="http://mytags.org">
+
+<div id="wrapper">
+	<div class="content">
+		<!--section -->
+		<section class="hero-section" data-scrollax-parent="true" id="sec1">
+			<div class="hero-parallax">
+				<div class="bg" th:data-bg="@{/assets/images/bg/22.jpg}"
+					data-scrollax="properties: { translateY: '200px' }"></div>
+				<div class="overlay op7"></div>
+			</div>
+			<div class="hero-section-wrap fl-wrap">
+				<div class="container">
+					<div class="home-intro">
+						<div class="section-title-separator"><span></span></div>
+						<h2>EasyBook Hotel Booking System</h2>
+						<span class="section-separator"></span>
+						<h3>Let's start exploring the world together with EasyBook</h3>
+					</div>
+					<form method="get" th:action="@{/hotels}">
+						<div class="main-search-input-wrap">
+							<div class="main-search-input fl-wrap">
+								<div class="main-search-input-item location" id="autocomplete-container">
+									<span class="inpt_dec"><i class="fal fa-map-marker"></i></span>
+									<div class="col-list-search-input-item in-loc-dec fl-wrap not-vis-arrow">
+
+										<div class="listsearch-input-item">
+											<select data-placeholder="City" class="chosen-select" name="area">
+												<th:block th:each="area : ${full_areas}">
+													<option>
+														<th:block th:text="${area.name}"></th:block>
+													</option>
+												</th:block>
+											</select>
+										</div>
+									</div>
+								</div>
+								<div class="main-search-input-item main-date-parent main-search-input-item_small">
+									<span class="inpt_dec"><i class="fal fa-calendar-check"></i></span> <input
+										type="text" placeholder="When" name="main-input-search"
+										value="01/03/2024 - 02/03/2024" readonly />
+								</div>
+								<div class="main-search-input-item">
+									<div class="qty-dropdown fl-wrap">
+										<div class="qty-dropdown-header fl-wrap"><i class="fal fa-users"></i> Rooms
+										</div>
+										<div class="qty-dropdown-content fl-wrap">
+											<div class="quantity-item">
+												<label><i class="fas fa-room"></i> Quantity</label>
+												<div class="quantity">
+													<input type="number" min="1" max="3" step="1" value="1">
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<input type="hidden" name="page" value="1">
+								<button class="main-search-button color2-bg" type="submit">Search <i
+										class="fal fa-search"></i></button>
+							</div>
+						</div>
+					</form>
+
+				</div>
+			</div>
+			<div class="header-sec-link">
+				<div class="container"><a href="#sec2" class="custom-scroll-link color-bg"><i
+							class="fal fa-angle-double-down"></i></a></div>
+			</div>
+		</section>
+		<!-- section end -->
+		<!--section -->
+		<section id="sec2">
+			<div class="container">
+				<div class="section-title">
+					<div class="section-title-separator"><span></span></div>
+					<h2>Popular Destination</h2>
+					<span class="section-separator"></span>
+					<p>Explore some of the best tips from around the city from our partners and friends.</p>
+				</div>
+			</div>
+			<!-- portfolio start -->
+
+			<div class="gallery-items fl-wrap mr-bot spad home-grid">
+				<th:block th:each="a : ${areas}">
+					<th:block th:if="${a.key.id !=2}">
+						<div class="gallery-item">
+							<div class="grid-item-holder">
+								<div class="listing-item-grid">
+									<div class="listing-counter"><span>
+											<th:block th:text="${a.value}">
+										</span> Hotels</div>
+									<img th:src="@{/assets/images/city/7.jpg}" alt="">
+									<div class="listing-item-cat">
+										<h3><a th:href="@{'/hotel?id_area='+  ${a.key.id}+'&page=1'}">
+												<th:block th:text="${a.key.name}"></th:block>
+											</a></h3>
+
+										<div class="clearfix"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</th:block>
+					<th:block th:if="${a.key.id ==2}">
+						<div class="gallery-item gallery-item-second">
+							<div class="grid-item-holder">
+								<div class="listing-item-grid">
+									<img th:src="@{/assets/images/city/3.jpg}" alt="">
+									<div class="listing-counter"><span>
+											<th:block th:text="${a.value}">
+										</span> Hotels</div>
+									<div class="listing-item-cat">
+										<h3>
+											<h3><a th:href="@{'/hotel?id_area='+${a.key.id}+'&page=1'}">
+													<th:block th:text="${a.key.name}"></th:block>
+												</a></h3>
+											<div class="weather-grid" data-grcity="Paris"></div>
+											<div class="clearfix"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</th:block>
+
+					<!-- gallery-item end-->
+					<!-- gallery-item-->
+
+				</th:block>
+
+			</div>
+
+		</section>
+		<!-- section end -->
+		<!-- section-->
+		<section class="grey-blue-bg">
+			<!-- container-->
+			<div class="container">
+				<div class="section-title">
+					<div class="section-title-separator"><span></span></div>
+					<h2>Recently Added Hotels</h2>
+					<span class="section-separator"></span>
+					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla
+						finibus lobortis pulvinar.</p>
+				</div>
+			</div>
+			<!-- container end-->
+			<!-- carousel -->
+			<div class="list-carousel fl-wrap card-listing ">
+				<!--listing-carousel-->
+				<div class="listing-carousel  fl-wrap ">
+					<!--slick-slide-item-->
+					<th:block th:each="hotel :${hotels}">
+						<div class="slick-slide-item">
+							<!-- listing-item  -->
+							<div class="listing-item">
+								<article class="geodir-category-listing fl-wrap">
+									<div class="geodir-category-img">
+										<a th:href="@{'/hotel/detail?id_hotel='+  ${hotel.id}}"><img
+												th:src="@{'/images/'+${hotel.image}}"
+												style="height: 390px; width: 390px;" alt=""></a>
+
+
+									</div>
+									<div class="geodir-category-opt">
+										<div class="listing-rating card-popup-rainingvis"
+											th:data-starrating2="${hotel.category.id}">
+										</div>
+										<div class="rate-class-name">
+											<div class="score"><strong>Very Good</strong>
+												<th:block th:text="${@hotelService.getCountEvaluateHotel(hotel.id)}">
+												</th:block> Reviews
+											</div>
+											<span>
+												<th:block th:text="${@hotelService.getAverageStarHotel(hotel.id)}">
+												</th:block>
+											</span>
+										</div>
+									</div>
+							</div>
+							<div class="geodir-category-content fl-wrap title-sin_item">
+								<div class="geodir-category-content-title fl-wrap">
+									<div class="geodir-category-content-title-item">
+										<h3 class="title-sin_map"><a
+												th:href="@{'/hotel/detail?id_hotel='+  ${hotel.id}}">
+												<th:block th:text="${hotel.name}">
+												</th:block>
+											</a></h3>
+										<div class="geodir-category-location fl-wrap"><a href="#" class="map-item"><i
+													class="fas fa-map-marker-alt"></i>
+												<th:block th:text="${hotel.address}">
+												</th:block>
+											</a></div>
+									</div>
+								</div>
+								<p>
+									<th:block th:text="${hotel.content}">
+									</th:block>
+								</p>
+								<ul class="facilities-list fl-wrap">
+									<li><i class="fal fa-wifi"></i><span>Free WiFi</span></li>
+									<li><i class="fal fa-parking"></i><span>Parking</span></li>
+									<li><i class="fal fa-smoking-ban"></i><span>Non-smoking Rooms</span></li>
+									<li><i class="fal fa-utensils"></i><span> Restaurant</span></li>
+								</ul>
+								<div class="geodir-category-footer fl-wrap">
+									<div class="geodir-category-price">Awg/Night <span>$ <th:block
+												th:if="${@roomService.findMinPriceHotelByIdHotel(hotel.id)}!=1000">
+												<th:block
+													th:text="${@roomService.findMinPriceHotelByIdHotel(hotel.id)}">
+												</th:block>
+											</th:block></span></div>
+
+								</div>
+							</div>
+							</article>
+						</div>
+					</th:block>
+				</div>
+
+
+
+			</div>
+			<!--listing-carousel end-->
+			<div class="swiper-button-prev sw-btn"><i class="fa fa-long-arrow-left"></i></div>
+			<div class="swiper-button-next sw-btn"><i class="fa fa-long-arrow-right"></i></div>
+	</div>
+	<!--  carousel end-->
+	</section>
+	<!-- section end -->
+	<!--section -->
+
+	<!-- section end -->
+	<!--section -->
+	<section>
+		<div class="container">
+			<div class="section-title">
+				<div class="section-title-separator"><span></span></div>
+				<h2>Thong ke</h2>
+				<span class="section-separator"></span>
+				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla
+					finibus lobortis pulvinar.</p>
+			</div>
+			<!--process-wrap   end-->
+			<div class=" single-facts fl-wrap mar-top">
+				<!-- inline-facts -->
+				<div class="inline-facts-wrap">
+					<div class="inline-facts">
+						<i class="fal fa-users"></i>
+						<div class="milestone-counter">
+							<div class="stats animaper">
+								<div class="num" th:data-num="${@accountService.countAccountUser()}"></div>
+							</div>
+						</div>
+						<h6>User</h6>
+					</div>
+				</div>
+				<!-- inline-facts end -->
+				<!-- inline-facts  -->
+				<div class="inline-facts-wrap">
+					<div class="inline-facts">
+						<i class="fal fa-users"></i>
+						<div class="milestone-counter">
+							<div class="stats animaper">
+								<div class="num" th:data-num="${@accountService.countAccountHotel()}"></div>
+							</div>
+						</div>
+						<h6>Owner</h6>
+					</div>
+				</div>
+				<!-- inline-facts end -->
+				<!-- inline-facts  -->
+				<div class="inline-facts-wrap">
+					<div class="inline-facts">
+						<i class="fal fa-hotel"></i>
+						<div class="milestone-counter">
+							<div class="stats animaper">
+								<div class="num" th:data-num="${@hotelService.countHotel()}"></div>
+							</div>
+						</div>
+						<h6>Hotel active</h6>
+					</div>
+				</div>
+				<!-- inline-facts end -->
+				<!-- inline-facts  -->
+				<div class="inline-facts-wrap">
+					<div class="inline-facts">
+						<i class="fal fa-hotel"></i>
+						<div class="milestone-counter">
+							<div class="stats animaper">
+								<div class="num" th:data-num="${@bookService.countBooking()}"></div>
+							</div>
+						</div>
+						<h6>bookings</h6>
+					</div>
+				</div>
+				<!-- inline-facts end -->
+			</div>
+		</div>
+	</section>
+	<!-- section end -->
+	<!--section -->
+
+
+
+
+</div>
+
+
+</html>
